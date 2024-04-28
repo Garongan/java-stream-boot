@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -22,14 +24,21 @@ public class App {
         System.out.println("Array Awal: ");
         System.out.println(Arrays.toString(numbers));
 
+        // inisialisasi class merge sort beserta parameter array
         MergeSort mergeSort = new MergeSort(numbers);
         numbers = mergeSort.getSort();
 
         System.out.println("Sorted Array: ");
         System.out.println(Arrays.toString(numbers));
 
+        // insialisasi class pyramid beserta heigt yang di inginkan
         Pyramid pyramid = new Pyramid(5);
+        // print pyramid
         pyramid.getPyramid();
+
+        // mendapatkan jumlah semua element dari numbers
+        int sum = IntStream.of(numbers).sum();
+        System.out.println(sum);
 
     }
 }

@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -26,6 +25,8 @@ public class App {
 
         // inisialisasi class merge sort beserta parameter array
         MergeSort mergeSort = new MergeSort(numbers);
+
+        // reassign array numbers dengan hasil sorting
         numbers = mergeSort.getSort();
 
         System.out.println("Sorted Array: ");
@@ -33,12 +34,23 @@ public class App {
 
         // insialisasi class pyramid beserta heigt yang di inginkan
         Pyramid pyramid = new Pyramid(5);
+
         // print pyramid
         pyramid.getPyramid();
 
         // mendapatkan jumlah semua element dari numbers
         int sum = IntStream.of(numbers).sum();
-        System.out.println(sum);
+        System.out.println("Jumlah dari array numbers: " + sum);
 
+        // inisialisasi class custom file
+        CustomFile customFile = new CustomFile();
+
+        // memanggil fungsi mendapatkan string dari file teks
+        customFile.getString();
+
+        // memanggil fungsi menemukan string dari file teks
+        String foundWord = customFile.findWord("Alvindo");
+        System.out.println(foundWord);
+        
     }
 }

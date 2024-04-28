@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -51,6 +53,23 @@ public class App {
         // memanggil fungsi menemukan string dari file teks
         String foundWord = customFile.findWord("Alvindo");
         System.out.println(foundWord);
+
+        // inisialisasi map
+        Map<String, String> newMap = new HashMap<>();
+        newMap.put("name", "Alvindo Tri Jatmiko");
+        newMap.put("age", "24");
+        newMap.put("address", "Jl. Topaz 7");
+
+        System.out.println("Before sort by value: ");
+        System.out.println(newMap);
+
+        // inisialisasi class sortHasMap
+        SortHasMap sortHasMap = new SortHasMap(newMap);
+
+        Map<String,String> sortByValue = sortHasMap.sortByValue();
+
+        System.out.println("After sort by value: ");
+        System.out.println(sortByValue);
         
     }
 }

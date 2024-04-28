@@ -1,55 +1,75 @@
 public class MergeSort {
 
-    public int[] mergeSort(int[] array, int low, int high) {
-        if (low == high) {
-            int[] barier = new int[1];
-            barier[0] = array[low];
-            return barier;
-        }
+    private int[] array;
+    private int[] leftHalf;
+    private int[] rightHalf;
 
-        int mid = (low + high) / 2;
-
-        int[] lefHalf = mergeSort(array, low, mid);
-        int[] rightHalf = mergeSort(array, mid + 1, high);
-
-        int[] merged = mergeTwoArray(lefHalf, rightHalf);
-
-        return merged;
+    public MergeSort(int[] array) {
+        this.array = array;
     }
 
-    private int[] mergeTwoArray(int[] left, int[] right) {
-        int[] sorted = new int[left.length + right.length];
+    public int[] getSort() {
+        mergeSort(array);
+        return array;
+    }
 
-        int i = 0, j = 0, k = 0;
+    private void mergeSort(int[] array) {
+        int length = array.length;
 
-        while (i < left.length && j < right.length) {
-            if (left[i] < right[j]) {
-                sorted[k] = left[i];
-                i++;
+        if (length < 2) {
+            return;
+        }
+
+        int midIndex = length / 2;
+
+        leftHalf = new int[midIndex];
+        rightHalf = new int[length - midIndex];
+
+        for (int i = 0; i < midIndex; i++) {
+            leftHalf[i] = array[i];
+        }
+
+        for (int i = midIndex; i < length; i++) {
+            rightHalf[i - midIndex] = array[i];
+        }
+
+        mergeSort(leftHalf);
+        mergeSort(rightHalf);
+
+        merge(array, leftHalf, rightHalf);
+    }
+
+    private void merge(int[] array, int[] leftHalf, int[] rightHalf) {
+        int leftSize = leftHalf.length;
+        int rightSize = rightHalf.length;
+
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int mergedIndex = 0;
+
+        while (leftIndex < leftSize && rightIndex < rightSize) {
+            if (leftHalf[leftIndex] <= rightHalf[rightIndex]) {
+                array[mergedIndex] = leftHalf[leftIndex];
+                leftIndex++;
             } else {
-                sorted[k] = right[j];
-                j++;
+                array[mergedIndex] = rightHalf[rightIndex];
+                rightIndex++;
             }
-            k++;
+            mergedIndex++;
         }
 
-        if (i == left.length) {
-            while (j < right.length) {
-                sorted[k] = right[j];
-                k++;
-                j++;
-            }
+        while (leftIndex < leftSize) {
+            array[mergedIndex] = leftHalf[leftIndex];
+            leftIndex++;
+            mergedIndex++;
         }
 
-        if (j == right.length) {
-            while (i < left.length) {
-                sorted[k] = left[i];
-                k++;
-                i++;
-            }
+        while (rightIndex < rightSize) {
+            array[mergedIndex] = rightHalf[rightIndex];
+            rightIndex++;
+            mergedIndex++;
         }
 
-        return sorted;
     }
 
 }

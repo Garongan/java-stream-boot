@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -10,14 +11,25 @@ public class App {
          * 4. Bagaimana cara menemukan string dalam file teks di java?
          * 5. Tulis program java yang mengurutkan hashmap berdasarkan nilainya
          */
-        int[] numbers = { 4, 1, 2, 3 };
+        // inisisalisasi array dengan length 10
+        int[] numbers = new int[10];
+        // insialisasi array dengan angka random
+        Random random = new Random();
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = random.nextInt(100);
+        }
+
         System.out.println("Array Awal: ");
         System.out.println(Arrays.toString(numbers));
 
-        MergeSort mergeSort = new MergeSort();
-        int[] sorted = mergeSort.mergeSort(numbers, 0, numbers.length - 1);
+        MergeSort mergeSort = new MergeSort(numbers);
+        numbers = mergeSort.getSort();
 
         System.out.println("Sorted Array: ");
-        System.out.println(Arrays.toString(sorted));
+        System.out.println(Arrays.toString(numbers));
+
+        Pyramid pyramid = new Pyramid(5);
+        pyramid.getPyramid();
+
     }
 }
